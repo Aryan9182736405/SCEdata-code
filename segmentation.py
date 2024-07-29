@@ -75,9 +75,8 @@ local_max_coords = ski.feature.peak_local_max(distance, min_distance=20, exclude
 local_max_mask = np.zeros(distance.shape, dtype=bool)
 local_max_mask[tuple(local_max_coords.T)] = True
 markers = ski.measure.label(local_max_mask)
-colors = np.array([
-    [255, 0, 0]
-])
+colors = np.random.randint(0, 256, size=(10000000, 3))
+
 segmented_cells = ski.segmentation.watershed(-distance, markers, mask=binary_image)
 segmented_cells = ski.color.label2rgb(segmented_cells,colors=colors, bg_label=0)
 
